@@ -2,6 +2,8 @@
 
 Storybook Status Addon can be used to add a component status label in [Storybook](https://storybook.js.org).
 
+![React Storybook Screenshot](https://raw.githubusercontent.com/etchteam/storybook-addon-status/master/screenshot.png)
+
 ## Installation
 
 ```sh
