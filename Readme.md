@@ -32,7 +32,7 @@ import React from 'react';
 export default {
   title: 'BetterSoftwareLink',
   parameters: {
-    status: 'stable' // stable | beta | depreciated
+    status: 'stable' // stable | beta | deprecated
   },
 };
 
