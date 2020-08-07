@@ -5,10 +5,10 @@ import { styled } from '@storybook/theming';
 
 const ADDON_ID = 'status';
 
-function statusBackground(status: 'beta' | 'stable' | 'depreciated') {
+function statusBackground(status: 'beta' | 'stable' | 'deprecated') {
   if (status === 'beta') return '#ec942c';
   if (status === 'stable') return '#339900';
-  if (status === 'depreciated') return '#f02c2c';
+  if (status === 'deprecated') return '#f02c2c';
   return '#666';
 }
 
