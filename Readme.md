@@ -44,3 +44,7 @@ export const defaultView = () => (
 You'll get an awesome label injected in the top toolbar.
 
 Made with ☕ at [Etch](https://etch.co)
+
+## Migration guide
+
+Need to [update your major version](Migration.md)?
