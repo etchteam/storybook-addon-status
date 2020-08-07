@@ -43,6 +43,22 @@ export const defaultView = () => (
 
 You'll get an awesome label injected in the top toolbar.
 
+### Custom statuses
+
+You caan add a custom status/colour map in preview.js using `addParameters`.
+
+```js
+import { addParameters } from '@storybook/react';
+
+addParameters({
+  statuses: {
+    wonky: '#8b008b',
+    perfect: '#2e8b57',
+    'run away': '#dc143c',
+  },
+});
+```
+
 Made with ☕ at [Etch](https://etch.co)
 
 ## Migration guide

@@ -5,17 +5,25 @@ import { styled } from '@storybook/theming';
 
 const ADDON_ID = 'status';
 
-function statusBackground(status: 'beta' | 'stable' | 'deprecated') {
-  if (status === 'beta') return '#ec942c';
-  if (status === 'stable') return '#339900';
-  if (status === 'deprecated') return '#f02c2c';
-  return '#666';
+type tStatuses = {
+  [key: string]: string
+}
+
+const defaultStatuses: tStatuses = {
+  beta: '#ec942c',
+  stable: '#339900',
+  deprecated: '#f02c2c',
+};
+
+function statusBackground(status: string, statuses?: tStatuses) {
+  const availableStatuses = statuses || defaultStatuses;
+  return availableStatuses[status] || '#666';
 }
 
 const StatusText = styled.span`
   align-items: center;
   align-self: center;
-  background: ${(props: any) => statusBackground(props.status)};
+  background: ${(props: any) => statusBackground(props.status, props.statuses)};
   border-radius: .25em;
   color: white;
   display: inline-flex;
@@ -34,7 +42,12 @@ const Status = () => {
 
     if (params.status) {
       return (
-        <StatusText status={params.status}>{params.status}</StatusText>
+        <StatusText 
+          status={params.status}
+          statuses={params.statuses}
+        >
+          {params.status}
+        </StatusText>
       );
     }
   }
