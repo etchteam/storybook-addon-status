@@ -59,7 +59,7 @@ addons.register(ADDON_ID, () => {
   addons.add(ADDON_ID, {
     title: 'Status',
     type: types.TOOL,
-    match: ({ viewMode }: { viewMode: string }) => viewMode === 'story',
+    match: ({ viewMode }: { viewMode: string }) => viewMode === 'story' || viewMode === 'docs',
     render: () => {
       return <Status />;
     },
