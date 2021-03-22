@@ -66,6 +66,7 @@
     "babel-plugin-require-context-hook": "1.0.0",
     "downlevel-dts": "0.5.0",
     "npmlog": "4.1.2",
+    "prettier": "^2.2.1",
     "shelljs": "0.8.4",
     "typescript": "3.9.5"
   },
