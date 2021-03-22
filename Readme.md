@@ -26,6 +26,7 @@ module.exports = {
 
 Then write your stories like this:
 
+**.js**
 ```js
 import React from 'react';
 
@@ -40,6 +41,15 @@ export const defaultView = () => (
   <a href="https://makebetter.software">Make Better Software</a>
 );
 ```
+
+**.mdx** (using addon-docs)
+```js
+import { Meta } from "@storybook/addon-docs/blocks";
+<Meta title="BetterSoftwareLink" parameters={{ status: 'stable' }}  /> // stable | beta | deprecated 
+...
+```
+
+
 
 You'll get an awesome label injected in the top toolbar.
 
