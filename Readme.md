@@ -49,8 +49,6 @@ import { Meta } from "@storybook/addon-docs/blocks";
 ...
 ```
 
-
-
 You'll get an awesome label injected in the top toolbar.
 
 ### Custom statuses
