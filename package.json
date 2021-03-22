@@ -22,7 +22,10 @@
     "storybook",
     "addon",
     "status",
-    "react"
+    "react",
+    "storybook-addon",
+    "organize",
+    "popular"
   ],
   "author": "gavmck",
   "license": "MIT",
@@ -68,5 +71,9 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "storybook": {
+    "icon": "https://pbs.twimg.com/profile_images/998947662287130625/7Ff1hOdQ_400x400.jpg",
+    "displayName": "Status"
   }
 }
