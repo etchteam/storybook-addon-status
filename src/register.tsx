@@ -27,6 +27,8 @@ addons.register(ADDON_ID, () => {
 
         const { parameters: { status, statuses } } = item;
 
+        const statusObj = (statuses && statuses[status]) || {};
+
         return (
           <>
             {name}
@@ -35,7 +37,7 @@ addons.register(ADDON_ID, () => {
               <StatusLabel
                 status={status}
                 statuses={statuses}
-                title={status}
+                title={`${status}: ${statusObj.description}`}
               />
             )}
           </>

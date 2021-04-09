@@ -45,26 +45,49 @@ export const defaultView = () => (
 **.mdx** (using addon-docs)
 ```js
 import { Meta } from "@storybook/addon-docs/blocks";
-<Meta title="BetterSoftwareLink" parameters={{ status: 'stable' }}  /> // stable | beta | deprecated 
+<Meta title="BetterSoftwareLink" parameters={{ status: 'stable' }}  /> // stable | beta | deprecated
 ...
 ```
 
-You'll get an awesome label injected in the top toolbar.
+You'll get an awesome label injected in the top toolbar and the sidebar.
 
 ### Custom statuses
 
-You caan add a custom status/colour map in preview.js using `addParameters`.
+You can add a custom status/colour map in preview.js using `addParameters`.
 
 ```js
 import { addParameters } from '@storybook/react';
 
 addParameters({
   statuses: {
-    wonky: '#8b008b',
-    perfect: '#2e8b57',
-    'run away': '#dc143c',
+    wonky: {
+      color: '#8b008b',
+      description: 'Description of this status',
+    },
+    perfect: {
+      color: '#2e8b57',
+      description: 'Description of this status',
+    },
+    'run away': {
+      color: '#dc143c',
+      description: 'Description of this status',
+    },
   },
 });
+```
+
+### Status links
+
+You can add a link to a status by passing a `statusLink` parameter on the component
+
+```js
+export default {
+  title: 'BetterSoftwareLink',
+  parameters: {
+    status: 'stable',
+    statusLink: 'https://etch.co'
+  },
+};
 ```
 
 Made with ☕ at [Etch](https://etch.co)

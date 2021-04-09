@@ -1,14 +1,6 @@
-type Statuses = {
-  [key: string]: string
-};
-
-const defaultStatuses: Statuses = {
-  beta: '#ec942c',
-  stable: '#339900',
-  deprecated: '#f02c2c',
-};
+import defaultStatuses, { Statuses } from './default-statuses';
 
 export default function statusBackground(status: string, statuses?: Statuses) {
-  const availableStatuses = statuses || defaultStatuses;
-  return availableStatuses[status] || '#666';
+  const availableStatuses = { ...defaultStatuses, ...(statuses || {}) };
+  return availableStatuses[status]?.color || '#666';
 }
