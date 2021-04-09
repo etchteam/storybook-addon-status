@@ -33,7 +33,7 @@ import React from 'react';
 export default {
   title: 'BetterSoftwareLink',
   parameters: {
-    status: 'stable' // stable | beta | deprecated
+    status: 'beta' // beta | deprecated
   },
 };
 
@@ -45,7 +45,7 @@ export const defaultView = () => (
 **.mdx** (using addon-docs)
 ```js
 import { Meta } from "@storybook/addon-docs/blocks";
-<Meta title="BetterSoftwareLink" parameters={{ status: 'stable' }}  /> // stable | beta | deprecated
+<Meta title="BetterSoftwareLink" parameters={{ status: 'beta' }}  /> // beta | deprecated
 ...
 ```
 
@@ -84,7 +84,7 @@ You can add a link to a status by passing a `statusLink` parameter on the compon
 export default {
   title: 'BetterSoftwareLink',
   parameters: {
-    status: 'stable',
+    status: 'beta',
     statusLink: 'https://etch.co'
   },
 };
