@@ -17,8 +17,6 @@ addons.register(ADDON_ID, () => {
   addons.setConfig({
     sidebar: {
       renderLabel: (item: any) => {
-        console.log(item);
-
         const { name, isLeaf } = item;
         // item can be a Root | Group | Story
         if (!isLeaf) {
