@@ -40,8 +40,6 @@ addons.register(ADDON_ID, () => {
           ...(status.statuses || {}),
         };
 
-        console.log(item);
-
         const statusConfig = statusConfigMap[status.type];
 
         if (!statusConfig) {
