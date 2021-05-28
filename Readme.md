@@ -4,6 +4,10 @@ Storybook Status Addon can be used to add a component status label in [Storybook
 
 ![React Storybook Screenshot](https://raw.githubusercontent.com/etchteam/storybook-addon-status/master/screenshot.png)
 
+#### **NOTE!**
+
+Storybook Addon Status has been updated to match Storybook 6.x and has a breaking change in the configuration of the addon in parameters
+
 ## Installation
 
 ```sh
@@ -18,22 +22,43 @@ Add the following content to it:
 
 ```js
 module.exports = {
-  addons: ['@etchteam/storybook-addon-status/register']
-}
+  addons: ['@etchteam/storybook-addon-status'],
+};
 ```
 
-## Usage
+In `preview.js` you can globally configure custom status configurations, or overwrite the built in "beta", "deprecated", "stable" & "releaseCandidate"
+
+```js
+export const parameters = {
+  state: {
+    statuses: {
+      released: {
+        background: '#0000ff',
+        color: '#ffffff',
+        description: 'This component is stable and released',
+      },
+    },
+  },
+};
+```
+
+## Story Usage
 
 Then write your stories like this:
 
 **.js**
+
 ```js
 import React from 'react';
 
 export default {
   title: 'BetterSoftwareLink',
   parameters: {
-    status: 'beta' // beta | deprecated
+    status: {
+      type: 'beta', // 'beta' | 'stable' | 'deprecated' | 'releaseCandidate'
+      url: 'http://www.url.com/status', // will make the tag a link
+      statuses: {...} // add custom statuses for this story here
+    }
   },
 };
 
@@ -43,52 +68,16 @@ export const defaultView = () => (
 ```
 
 **.mdx** (using addon-docs)
+
 ```js
 import { Meta } from "@storybook/addon-docs/blocks";
-<Meta title="BetterSoftwareLink" parameters={{ status: 'beta' }}  /> // beta | deprecated
+<Meta title="BetterSoftwareLink" parameters={{ status: { type: 'beta' }}  /> // 'beta' | 'stable' | 'deprecated' | 'releaseCandidate'
 ...
 ```
 
 You'll get an awesome label injected in the top toolbar and the sidebar.
 
-### Custom statuses
-
-You can add a custom status/colour map in preview.js using `addParameters`.
-
-```js
-import { addParameters } from '@storybook/react';
-
-addParameters({
-  statuses: {
-    wonky: {
-      color: '#8b008b',
-      description: 'Description of this status',
-    },
-    perfect: {
-      color: '#2e8b57',
-      description: 'Description of this status',
-    },
-    'run away': {
-      color: '#dc143c',
-      description: 'Description of this status',
-    },
-  },
-});
-```
-
-### Status links
-
-You can add a link to a status by passing a `statusLink` parameter on the component
-
-```js
-export default {
-  title: 'BetterSoftwareLink',
-  parameters: {
-    status: 'beta',
-    statusLink: 'https://etch.co'
-  },
-};
-```
+**Note** the `type` will be used as label for tag and will convert camelCase to words (release)
 
 Made with ☕ at [Etch](https://etch.co)
 
