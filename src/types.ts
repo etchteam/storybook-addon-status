@@ -1,4 +1,9 @@
-export type StatusType = 'beta' | 'deprecated' | string;
+export type StatusType =
+  | 'beta'
+  | 'deprecated'
+  | 'stable'
+  | 'releaseCandidate'
+  | string;
 
 export type CustomStatusType = {
   background?: string;
