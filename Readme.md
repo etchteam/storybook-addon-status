@@ -26,7 +26,7 @@ In `preview.js` you can globally configure custom status configurations, or over
 
 ```js
 export const parameters = {
-  state: {
+  status: {
     statuses: {
       released: {
         background: '#0000ff',

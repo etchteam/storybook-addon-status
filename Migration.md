@@ -7,12 +7,24 @@ Update the parameters config in `preview.js`:
 
 ```
 export const parameters = {
-  state: {
+  status: {
     statuses: {
       [... custom statuses]
     },
   },
 };
+```
+
+Custom statuses will need a background color defined:
+
+```
+{
+  perfect: {
+    background: '#2e8b57',
+    color: '#ffffff',
+    description: 'Description of this status',
+  },
+}
 ```
 
 Statuses in stories should now be written as an object:
