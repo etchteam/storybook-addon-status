@@ -5,6 +5,11 @@ export type StatusType =
   | 'releaseCandidate'
   | string;
 
+export type UrlStatusType = {
+  name: StatusType,
+  url: string;
+};
+
 export type CustomStatusType = {
   background?: string;
   color?: string;
@@ -16,7 +21,7 @@ export type CustomStatusTypes = {
 };
 
 export type AddonParameters = {
-  type?: StatusType;
+  type?: StatusType | (StatusType | UrlStatusType)[];
   statuses?: CustomStatusTypes;
   url?: string;
 };
