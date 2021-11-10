@@ -63,6 +63,17 @@ export const defaultView = () => (
 );
 ```
 
+For multiple statuses `type` also accepts array values. If not specifically set every status uses `status.url` as the linked Url.
+
+```jsonc
+status: {
+  type: ['beta', 'released', 'myCustomStatus', { name: 'stable', url: 'http://www.example.com' }],
+  // url, statuses ...
+}
+```
+
+**NOTE:** The status dot in the sidebar only shows the color of the first status.
+
 **.mdx** (using addon-docs)
 
 ```js

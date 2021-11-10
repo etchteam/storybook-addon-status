@@ -1,12 +1,13 @@
-import React from 'react';
 import { addons, types } from '@storybook/addons';
+import { startCase } from 'lodash';
+import React from 'react';
 
-import Status from './components/StatusTag';
 import StatusDot from './components/StatusDot';
+import Status from './components/StatusTag';
 import { ADDON_ID } from './constants';
+import { defaultStatuses } from './defaults';
 
 import type { AddonParameters } from './types';
-import { defaultStatuses } from './defaults';
 
 type RenderLabelItem = {
   name: string;
@@ -40,7 +41,16 @@ addons.register(ADDON_ID, () => {
           ...(status.statuses || {}),
         };
 
-        const statusConfig = statusConfigMap[status.type];
+        let statusName: string = '';
+
+        if (Array.isArray(status.type)) {
+          const firstStatus = status.type?.[0];
+          statusName = typeof firstStatus === 'string' ? firstStatus : firstStatus.name;
+        } else {
+          statusName = status.type;
+        }
+
+        const statusConfig = statusConfigMap[statusName];
 
         if (!statusConfig) {
           return name;
@@ -53,7 +63,7 @@ addons.register(ADDON_ID, () => {
             {name}
             <StatusDot
               background={background}
-              title={`${status}: ${description}`}
+              title={`${startCase(statusName)}: ${description}`}
             />
           </>
         );

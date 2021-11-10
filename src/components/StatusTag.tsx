@@ -5,7 +5,7 @@ import { startCase } from 'lodash';
 import { defaultStatuses, defaultBackground, defaultColor } from '../defaults';
 import { ADDON_PARAM_KEY } from '../constants';
 
-import type { AddonParameters } from '../types';
+import type { AddonParameters, CustomStatusType } from '../types';
 
 const tagStyles = css`
   align-self: center;
@@ -49,29 +49,69 @@ const StatusTag = () => {
     ...(statuses || {}),
   };
 
-  const statusConfig = statusConfigMap[type];
+  let statusConfigs: { url?: string; label?: string, status?: CustomStatusType }[];
 
-  if (!statusConfig) {
+  if (Array.isArray(type)) {
+    statusConfigs = type.map((t) => {
+      if (typeof t === 'string') {
+        return {
+          label: t,
+          status: statusConfigMap[t],
+          url,
+        };
+      }
+
+      return {
+        label: t.name,
+        status: statusConfigMap[t.name],
+        url: t.url,
+      };
+    });
+  } else {
+    statusConfigs = [
+      {
+        label: type,
+        status: statusConfigMap[type],
+        url,
+      },
+    ];
+  }
+
+  statusConfigs = statusConfigs.filter((x) => x.status != null);
+
+  if (!statusConfigs?.length) {
     return null;
   }
 
-  const { background, color, description } = statusConfig;
+  return (
+    <>
+      {statusConfigs.map((statusConfig) => {
+        const { background, color, description } = statusConfig.status;
+        const statusUrl = statusConfig.url;
 
-  const style: React.CSSProperties = {
-    color: color ?? defaultColor,
-    backgroundColor: background ?? defaultBackground,
-  };
+        const style: React.CSSProperties = {
+          color: color ?? defaultColor,
+          backgroundColor: background ?? defaultBackground,
+        };
 
-  const label = startCase(type);
+        const label = startCase(statusConfig.label);
 
-  return url ? (
-    <LinkTag style={style} title={description} href={url}>
-      {label}
-    </LinkTag>
-  ) : (
-    <TextTag style={style} title={description}>
-      {label}
-    </TextTag>
+        return statusUrl ? (
+          <LinkTag
+            key={statusConfig.label}
+            style={style}
+            title={description}
+            href={statusUrl}
+          >
+            {label}
+          </LinkTag>
+        ) : (
+          <TextTag key={statusConfig.label} style={style} title={description}>
+            {label}
+          </TextTag>
+        );
+      })}
+    </>
   );
 };
 
