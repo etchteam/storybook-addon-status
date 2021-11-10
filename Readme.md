@@ -52,8 +52,6 @@ export default {
   parameters: {
     status: {
       type: 'beta', // 'beta' | 'stable' | 'deprecated' | 'releaseCandidate'
-      // 
-      // 
       url: 'http://www.url.com/status', // will make the tag a link
       statuses: {...} // add custom statuses for this story here
     }
@@ -65,15 +63,16 @@ export const defaultView = () => (
 );
 ```
 
-For multiple statuses the type property also accepts array values. If not specifically set every status uses the same Url.
-
-**NOTE:** The status dot in the sidebar only shows the color of the first status.
+For multiple statuses `type` also accepts array values. If not specifically set every status uses `status.url` as the linked Url.
 
 ```jsonc
 status: {
-  type: ['beta', 'released', 'myCustomStatus', { name: 'stable', url: 'http://www.example.com' }]
+  type: ['beta', 'released', 'myCustomStatus', { name: 'stable', url: 'http://www.example.com' }],
+  // url, statuses ...
 }
 ```
+
+**NOTE:** The status dot in the sidebar only shows the color of the first status.
 
 **.mdx** (using addon-docs)
 
