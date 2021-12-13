@@ -4,7 +4,7 @@ import { styled, css } from '@storybook/theming';
 import { startCase } from 'lodash';
 import { defaultStatuses, defaultBackground, defaultColor } from '../defaults';
 import { ADDON_PARAM_KEY } from '../constants';
-import { AddonParameters, CustomStatusType } from '../types';
+import { AddonParameters, CustomStatusType, StatusVersion } from '../types';
 
 const tagStyles = css`
   align-self: center;
@@ -48,7 +48,7 @@ const StatusTag = () => {
     ...(statuses || {}),
   };
 
-  let statusConfigs: { url?: string; label?: string, status?: CustomStatusType, version?: string }[];
+  let statusConfigs: { url?: string; label?: string, status?: CustomStatusType, version?: StatusVersion }[];
 
   if (Array.isArray(type)) {
     statusConfigs = type.map((t) => {
