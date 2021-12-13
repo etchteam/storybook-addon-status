@@ -69,7 +69,25 @@ For multiple statuses `type` also accepts array values. If not specifically set 
 ```jsonc
 status: {
   type: ['beta', 'released', 'myCustomStatus', { name: 'stable', url: 'http://www.example.com' }],
-  // url, statuses ...
+  // url, version, statuses ...
+}
+```
+
+To include a `version` beside the `type` add the parameter as a string.
+
+```jsonc
+status: {
+  version: '1.2.5'
+  // type, url ...
+}
+```
+
+Also more complex `version`s are accepted.
+
+```jsonc
+status: {
+  version: '2.0.0-alpha.0'
+  // type, url ...
 }
 ```
 
