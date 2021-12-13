@@ -52,6 +52,7 @@ export default {
   parameters: {
     status: {
       type: 'beta', // 'beta' | 'stable' | 'deprecated' | 'releaseCandidate'
+      version: '1.2.5', // will be displayed between parentheses after the type
       url: 'http://www.url.com/status', // will make the tag a link
       statuses: {...} // add custom statuses for this story here
     }

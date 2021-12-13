@@ -20,8 +20,11 @@ export type CustomStatusTypes = {
   [key: string]: CustomStatusType;
 };
 
+export type StatusVersion = string
+
 export type AddonParameters = {
   type?: StatusType | (StatusType | UrlStatusType)[];
   statuses?: CustomStatusTypes;
   url?: string;
+  version? : StatusVersion
 };

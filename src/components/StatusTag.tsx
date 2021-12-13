@@ -38,7 +38,7 @@ const StatusTag = () => {
     return null;
   }
 
-  const { type, url, statuses } = parameters;
+  const { type, url, statuses, version } = parameters;
 
   if (!type) {
     return null;
@@ -49,7 +49,7 @@ const StatusTag = () => {
     ...(statuses || {}),
   };
 
-  let statusConfigs: { url?: string; label?: string, status?: CustomStatusType }[];
+  let statusConfigs: { url?: string; label?: string, status?: CustomStatusType, version?: string }[];
 
   if (Array.isArray(type)) {
     statusConfigs = type.map((t) => {
@@ -58,6 +58,7 @@ const StatusTag = () => {
           label: t,
           status: statusConfigMap[t],
           url,
+          version,
         };
       }
 
@@ -65,6 +66,7 @@ const StatusTag = () => {
         label: t.name,
         status: statusConfigMap[t.name],
         url: t.url,
+        version: t.version,
       };
     });
   } else {
@@ -73,6 +75,7 @@ const StatusTag = () => {
         label: type,
         status: statusConfigMap[type],
         url,
+        version,
       },
     ];
   }
@@ -95,6 +98,7 @@ const StatusTag = () => {
         };
 
         const label = startCase(statusConfig.label);
+        const version = statusConfig.version ? `(${statusConfig.version})` : ''
 
         return statusUrl ? (
           <LinkTag
@@ -103,11 +107,11 @@ const StatusTag = () => {
             title={description}
             href={statusUrl}
           >
-            {label}
+            {label} {version}
           </LinkTag>
         ) : (
           <TextTag key={statusConfig.label} style={style} title={description}>
-            {label}
+            {label} {version}
           </TextTag>
         );
       })}
