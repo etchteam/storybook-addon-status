@@ -4,7 +4,7 @@ import { styled, css } from '@storybook/theming';
 import { startCase } from 'lodash';
 import { defaultStatuses, defaultBackground, defaultColor } from '../defaults';
 import { ADDON_PARAM_KEY } from '../constants';
-import { AddonParameters, CustomStatusType, StatusVersion } from '../types';
+import type { AddonParameters, CustomStatusType, StatusVersion } from '../types';
 
 const tagStyles = css`
   align-self: center;
