@@ -88,13 +88,14 @@ const StatusTag = () => {
       {statusConfigs.map((statusConfig) => {
         const { background, color, description } = statusConfig.status;
         const statusUrl = statusConfig.url;
+        const label = startCase(statusConfig.label);
 
         const style: React.CSSProperties = {
-          color: color ?? defaultColor,
-          backgroundColor: background ?? defaultBackground,
+          color: color ??
+            (defaultStatuses[label] ? defaultStatuses[label].color : defaultColor),
+          backgroundColor: background ??
+            (defaultStatuses[label] ? defaultStatuses[label].background : defaultBackground),
         };
-
-        const label = startCase(statusConfig.label);
 
         return statusUrl ? (
           <LinkTag
