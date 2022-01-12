@@ -91,10 +91,10 @@ const StatusTag = () => {
         const label = startCase(statusConfig.label);
 
         const style: React.CSSProperties = {
-          color: color ??
-            (defaultStatuses[label] ? defaultStatuses[label].color : defaultColor),
-          backgroundColor: background ??
-            (defaultStatuses[label] ? defaultStatuses[label].background : defaultBackground),
+          color: color
+           ?? (defaultStatuses[label] ? defaultStatuses[label].color : defaultColor),
+          backgroundColor: background
+           ?? (defaultStatuses[label] ? defaultStatuses[label].background : defaultBackground),
         };
 
         return statusUrl ? (
