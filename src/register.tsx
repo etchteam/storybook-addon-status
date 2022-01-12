@@ -62,6 +62,7 @@ addons.register(ADDON_ID, () => {
           <>
             {name}
             <StatusDot
+              type={statusName}
               background={background}
               title={`${startCase(statusName)}: ${description}`}
             />
