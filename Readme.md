@@ -78,7 +78,7 @@ status: {
 
 ```js
 import { Meta } from "@storybook/addon-docs/blocks";
-<Meta title="BetterSoftwareLink" parameters={{ status: { type: 'beta' }}  /> // 'beta' | 'stable' | 'deprecated' | 'releaseCandidate'
+<Meta title="BetterSoftwareLink" parameters={{ status: { type: 'beta' } }}  /> // 'beta' | 'stable' | 'deprecated' | 'releaseCandidate'
 ...
 ```
 
