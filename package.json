@@ -46,7 +46,7 @@
     "util-deprecate": "^1.0.2"
   },
   "peerDependencies": {
-    "react": "^16.8.3 || ^17.0.2"
+    "react": "^16.8.3 || ^17.0.2" || ^18.0.0"
   },
   "devDependencies": {
     "@babel/cli": "7.10.4",
