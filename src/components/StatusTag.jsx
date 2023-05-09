@@ -27,7 +27,6 @@ const TextTag = styled.span`
 `;
 
 const StatusTag = ({ parameters }) => {
-console.log(parameters);
   if (parameters === null) {
     return null;
   }
