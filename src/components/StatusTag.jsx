@@ -1,9 +1,7 @@
 import React from 'react';
-import { useParameter } from '@storybook/preview-api';
 import { styled, css } from '@storybook/theming';
 import { startCase } from 'lodash';
 import { defaultStatuses, defaultBackground, defaultColor } from '../defaults';
-import { ADDON_PARAM_KEY } from '../constants';
 
 const tagStyles = css`
   align-self: center;
