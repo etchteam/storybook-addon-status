@@ -1,11 +1,9 @@
 import React from 'react';
-import { useParameter } from '@storybook/api';
+import { useParameter } from '@storybook/preview-api';
 import { styled, css } from '@storybook/theming';
 import { startCase } from 'lodash';
 import { defaultStatuses, defaultBackground, defaultColor } from '../defaults';
 import { ADDON_PARAM_KEY } from '../constants';
-
-import type { AddonParameters, CustomStatusType } from '../types';
 
 const tagStyles = css`
   align-self: center;
@@ -28,12 +26,8 @@ const TextTag = styled.span`
   ${tagStyles}
 `;
 
-const StatusTag = () => {
-  const parameters = useParameter(
-    ADDON_PARAM_KEY,
-    null,
-  ) as AddonParameters | null;
-
+const StatusTag = ({ parameters }) => {
+console.log(parameters);
   if (parameters === null) {
     return null;
   }
@@ -49,7 +43,7 @@ const StatusTag = () => {
     ...(statuses || {}),
   };
 
-  let statusConfigs: { url?: string; label?: string, status?: CustomStatusType }[];
+  let statusConfigs;
 
   if (Array.isArray(type)) {
     statusConfigs = type.map((t) => {
@@ -90,7 +84,7 @@ const StatusTag = () => {
         const statusUrl = statusConfig.url;
         const label = startCase(statusConfig.label);
 
-        const style: React.CSSProperties = {
+        const style = {
           color: color
            ?? (defaultStatuses[label] ? defaultStatuses[label].color : defaultColor),
           backgroundColor: background
