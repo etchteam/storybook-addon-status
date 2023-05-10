@@ -13,6 +13,6 @@ module.exports = {
   },
   "plugins": ["react"],
   "rules": {
-    "react/display-name": false
+    "react/display-name": 0
   }
 };
