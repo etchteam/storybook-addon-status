@@ -1,6 +1,6 @@
 {
   "name": "@etchteam/storybook-addon-status",
-  "version": "4.2.3",
+  "version": "4.2.4",
   "description": "Add component status to the storybook UI",
   "main": "dist/preset.js",
   "files": [
