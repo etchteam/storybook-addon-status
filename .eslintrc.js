@@ -1,18 +1,18 @@
 module.exports = {
-  root: true,
-  parser: '@typescript-eslint/parser',
-  plugins: [
-    '@typescript-eslint',
-  ],
-  extends: [
-    'airbnb-typescript',
-  ],
-  parserOptions: {
-    project: './tsconfig.json',
+  "env": {
+    "browser": true,
+    "es2021": true
   },
-  rules: {
-    "import/no-extraneous-dependencies": ["error", {
-      "devDependencies": true
-    }]
+  "extends": ["plugin:react/recommended", "plugin:storybook/recommended"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "react/display-name": false
   }
 };

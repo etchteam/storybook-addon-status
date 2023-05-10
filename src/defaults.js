@@ -1,14 +1,12 @@
-import type { CustomStatusTypes, CustomStatusType } from './types';
-
 export const defaultBackground = '#2f2f2f';
 export const defaultColor = '#ffffff';
 
-export const defaultStatus: Pick<CustomStatusType, 'color' | 'background'> = {
+export const defaultStatus = {
   color: defaultColor,
   background: defaultBackground,
 };
 
-export const defaultStatuses: CustomStatusTypes = {
+export const defaultStatuses = {
   beta: {
     color: '#ffffff',
     background: '#ec942c',

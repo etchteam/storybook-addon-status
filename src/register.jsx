@@ -1,33 +1,29 @@
-import { addons, types } from '@storybook/addons';
+import { addons, types, useParameter } from '@storybook/manager-api';
 import { startCase } from 'lodash';
 import React from 'react';
 
 import StatusDot from './components/StatusDot';
 import Status from './components/StatusTag';
-import { ADDON_ID } from './constants';
+import { ADDON_ID, ADDON_PARAM_KEY } from './constants';
 import { defaultStatuses } from './defaults';
-
-import type { AddonParameters } from './types';
-
-type RenderLabelItem = {
-  name: string;
-  isLeaf: boolean;
-  parameters: {
-    status?: AddonParameters;
-  };
-};
 
 addons.register(ADDON_ID, () => {
   addons.add(ADDON_ID, {
     title: 'Status',
     type: types.TOOL,
-    match: ({ viewMode }) => viewMode === 'story' || viewMode === 'docs',
-    render: () => <Status />,
+    render: () => {
+      const parameters = useParameter(
+        ADDON_PARAM_KEY,
+        null,
+      );
+
+      return <Status parameters={parameters} />
+    },
   });
 
   addons.setConfig({
     sidebar: {
-      renderLabel: (item: RenderLabelItem) => {
+      renderLabel: (item) => {
         const { name, isLeaf, parameters } = item;
         // item can be a Root | Group | Story
         if (!isLeaf || !parameters || !parameters.status) {
@@ -41,7 +37,7 @@ addons.register(ADDON_ID, () => {
           ...(status.statuses || {}),
         };
 
-        let statusName: string = '';
+        let statusName = '';
 
         if (Array.isArray(status.type)) {
           const firstStatus = status.type?.[0];
