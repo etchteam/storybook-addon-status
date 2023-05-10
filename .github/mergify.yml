@@ -17,11 +17,11 @@ pull_request_rules:
   - name: Auto-squash when all checks pass and the PR has been approved
     conditions:
       - and:
-        - check-success=SonarCloud Code Analysis
-        - check-success=build
-        - check-success=lint
-        - "#review-requested=0"
-        - "#approved-reviews-by>=1"
+          - check-success=SonarCloud Code Analysis
+          - check-success=build
+          - check-success=lint
+          - "#review-requested=0"
+          - "#approved-reviews-by>=1"
     actions:
       merge:
         method: merge
