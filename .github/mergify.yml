@@ -1,0 +1,50 @@
+---
+pull_request_rules:
+  - name: Auto-squash dependabot updates when checks pass
+    conditions:
+      - and:
+          - author~=^dependabot(|-preview)\[bot\]$
+          - label!=wontfix
+          - check-success=SonarCloud Code Analysis
+          - check-success=build
+          - check-success=lint
+    actions:
+      review:
+        type: APPROVE
+        message: Automatically approving dependabot
+      merge:
+        method: merge
+  - name: Auto-squash when all checks pass and the PR has been approved
+    conditions:
+      - and:
+        - check-success=SonarCloud Code Analysis
+        - check-success=build
+        - check-success=lint
+        - "#review-requested=0"
+        - "#approved-reviews-by>=1"
+    actions:
+      merge:
+        method: merge
+  - name: Ask an old fart to review the code
+    conditions:
+      - -closed
+      - -draft
+      - author~=!^dependabot(|-preview)\[bot\]$
+    actions:
+      request_reviews:
+        users:
+          - JoshTheWanderer
+          - DanWebb
+          - gavmck
+        random_count: 1
+  - name: Get some more eyes on it
+    conditions:
+      - -closed
+      - -draft
+      - author~=!^dependabot(|-preview)\[bot\]$
+    actions:
+      request_reviews:
+        users:
+          - ella-etch
+          - Carl-J-M
+        random_count: 1
