@@ -80,12 +80,14 @@ const StatusTag = ({ parameters }) => {
         const { background, color, description } = statusConfig.status;
         const statusUrl = statusConfig.url;
         const label = startCase(statusConfig.label);
+        const otherStyles = statusConfig.style ?? {};
 
         const style = {
           color: color
            ?? (defaultStatuses[label] ? defaultStatuses[label].color : defaultColor),
           backgroundColor: background
            ?? (defaultStatuses[label] ? defaultStatuses[label].background : defaultBackground),
+          ...otherStyles,
         };
 
         return statusUrl ? (
@@ -98,7 +100,7 @@ const StatusTag = ({ parameters }) => {
             {label}
           </LinkTag>
         ) : (
-          <TextTag key={statusConfig.label} style={style} title={description}>
+          <TextTag key={statusConfig.label} style={style} title={description} className={`status ${statusConfig.label}`}>
             {label}
           </TextTag>
         );
