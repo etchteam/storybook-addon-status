@@ -1,16 +1,16 @@
 import React from 'react';
 
-import { Page } from './Page';
 import * as HeaderStories from './Header.stories';
+import { Page } from './Page';
 
 export default {
   title: 'Example/Page',
   component: Page,
   parameters: {
     status: {
-      type: 'customStatus'
-    }
-  }
+      type: 'customStatus',
+    },
+  },
 };
 
 const Template = (args) => <Page {...args} />;

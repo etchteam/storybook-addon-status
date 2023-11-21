@@ -12,8 +12,8 @@ export default {
     status: {
       type: 'beta',
       url: 'http://www.url.com/status',
-    }
-  }
+    },
+  },
 };
 
 const Template = (args) => <Button {...args} />;

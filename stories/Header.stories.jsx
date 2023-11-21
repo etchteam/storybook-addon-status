@@ -7,9 +7,9 @@ export default {
   component: Header,
   parameters: {
     status: {
-      type: ['stable', 'releaseCandidate']
-    }
-  }
+      type: ['stable', 'releaseCandidate'],
+    },
+  },
 };
 
 const Template = (args) => <Header {...args} />;
