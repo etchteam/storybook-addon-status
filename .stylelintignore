@@ -1,0 +1,9 @@
+LICENSE
+dist/
+*.js*
+*.ts*
+*.md*
+*.gif
+*.svg
+*.png
+*.log

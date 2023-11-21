@@ -1,6 +1,5 @@
 import { addons, types, useParameter } from '@storybook/manager-api';
-import { startCase } from 'lodash';
-import React from 'react';
+import startCase from 'lodash/startCase';
 
 import StatusDot from './components/StatusDot';
 import Status from './components/StatusTag';
@@ -12,12 +11,10 @@ addons.register(ADDON_ID, (api) => {
     title: 'Status',
     type: types.TOOL,
     render: () => {
-      const parameters = useParameter(
-        ADDON_PARAM_KEY,
-        null,
-      );
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const parameters = useParameter(ADDON_PARAM_KEY, null);
 
-      return <Status parameters={parameters} />
+      return <Status parameters={parameters} />;
     },
   });
 
@@ -43,7 +40,8 @@ addons.register(ADDON_ID, (api) => {
 
           if (Array.isArray(status.type)) {
             const firstStatus = status.type?.[0];
-            statusName = typeof firstStatus === 'string' ? firstStatus : firstStatus.name;
+            statusName =
+              typeof firstStatus === 'string' ? firstStatus : firstStatus.name;
           } else {
             statusName = status.type;
           }

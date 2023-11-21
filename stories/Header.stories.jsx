@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Header } from './Header';
 
 export default {
@@ -7,9 +5,9 @@ export default {
   component: Header,
   parameters: {
     status: {
-      type: ['stable', 'releaseCandidate']
-    }
-  }
+      type: ['stable', 'releaseCandidate'],
+    },
+  },
 };
 
 const Template = (args) => <Header {...args} />;
