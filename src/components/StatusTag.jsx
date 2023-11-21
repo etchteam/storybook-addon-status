@@ -1,7 +1,7 @@
-import React from 'react';
-import { styled, css } from '@storybook/theming';
-import { startCase } from 'lodash';
-import { defaultStatuses, defaultBackground, defaultColor } from '../defaults';
+import { css, styled } from '@storybook/theming';
+import startCase from 'lodash/startCase';
+
+import { defaultBackground, defaultColor, defaultStatuses } from '../defaults';
 
 const tagStyles = css`
   align-self: center;
@@ -82,10 +82,16 @@ const StatusTag = ({ parameters }) => {
         const label = startCase(statusConfig.label);
 
         const style = {
-          color: color
-           ?? (defaultStatuses[label] ? defaultStatuses[label].color : defaultColor),
-          backgroundColor: background
-           ?? (defaultStatuses[label] ? defaultStatuses[label].background : defaultBackground),
+          color:
+            color ??
+            (defaultStatuses[label]
+              ? defaultStatuses[label].color
+              : defaultColor),
+          backgroundColor:
+            background ??
+            (defaultStatuses[label]
+              ? defaultStatuses[label].background
+              : defaultBackground),
         };
 
         return statusUrl ? (
