@@ -9,7 +9,7 @@
     "*.js"
   ],
   "scripts": {
-    "prepare": "babel ./src --out-dir ./dist",
+    "prepare": "husky install; babel ./src --out-dir ./dist",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "lint": "eslint ."
