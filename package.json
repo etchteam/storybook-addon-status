@@ -12,7 +12,7 @@
     "prepare": "husky install; babel ./src --out-dir ./dist",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "lint": "eslint ."
+    "lint": "eslint . && stylelint ."
   },
   "repository": {
     "type": "git",
@@ -54,6 +54,7 @@
     "@babel/preset-react": "^7.18.6",
     "@commitlint/cli": "^17.6.3",
     "@commitlint/config-conventional": "^17.6.3",
+    "@etchteam/stylelint-config": "^1.5.0",
     "@storybook/addon-essentials": "^7.0.9",
     "@storybook/addon-interactions": "^7.0.9",
     "@storybook/addon-links": "^7.0.9",
@@ -66,7 +67,8 @@
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
     "prop-types": "^15.8.1",
-    "storybook": "^7.0.9"
+    "storybook": "^7.0.9",
+    "stylelint": "^15.11.0"
   },
   "publishConfig": {
     "access": "public"
