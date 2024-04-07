@@ -5,7 +5,8 @@ const config = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
-    '../src/preset'
+    '@storybook/addon-webpack5-compiler-babel',
+    '../dist/preset',
   ],
   framework: {
     name: '@storybook/react-webpack5',
