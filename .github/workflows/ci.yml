@@ -9,6 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: github/super-linter/slim@v4
+        env:
+          LINTER_RULES_PATH: /
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: 'master'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # We use our own lint script for JavaScript to avoid config clashes
+          VALIDATE_JAVASCRIPT_STANDARD: false
+          VALIDATE_JAVASCRIPT_ES: false
+          VALIDATE_JSX: false
+          VALIDATE_CSS: false
+          VALIDATE_HTML: false
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc

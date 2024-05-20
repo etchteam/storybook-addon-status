@@ -47,7 +47,6 @@ Then write your stories like this:
 **.js**
 
 ```js
-import React from 'react';
 
 export default {
   title: 'BetterSoftwareLink',
