@@ -1,17 +1,23 @@
 {
   "name": "@etchteam/storybook-addon-status",
-  "version": "4.2.4",
+  "version": "5.0.0",
   "description": "Add component status to the storybook UI",
-  "main": "dist/preset.js",
+  "type": "module",
+  "main": "dist/manager.js",
+  "exports": {
+    "./manager": "./dist/manager.js",
+    "./package.json": "./package.json"
+  },
   "files": [
     "dist/**/*",
     "README.md",
-    "*.js"
+    "manager.js"
   ],
   "scripts": {
-    "prepare": "babel ./src --out-dir ./dist",
+    "prepare": "tsup",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "release": "semantic-release"
   },
   "repository": {
     "type": "git",
@@ -26,41 +32,38 @@
     "organize",
     "popular"
   ],
-  "author": "etchteam",
+  "author": "Etch <hey@etch.co>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/etchteam/storybook-addon-status/issues"
   },
   "homepage": "https://github.com/etchteam/storybook-addon-status#readme",
-  "dependencies": {
-    "@storybook/api": "^7.0.9",
-    "@storybook/client-logger": "^7.0.9",
-    "@storybook/components": "^7.0.9",
-    "@storybook/core-events": "^7.0.9",
-    "@storybook/manager-api": "^7.0.9",
-    "@storybook/theming": "^7.0.9",
-    "lodash": "^4.17.21",
-    "react": "18.2.0",
-    "react-dom": "^18.2.0"
-  },
   "devDependencies": {
-    "@babel/cli": "^7.14.5",
-    "@babel/core": "^7.14.6",
-    "@babel/preset-env": "^7.21.5",
-    "@babel/preset-react": "^7.18.6",
-    "@storybook/addon-essentials": "^7.0.9",
-    "@storybook/addon-interactions": "^7.0.9",
-    "@storybook/addon-links": "^7.0.9",
-    "@storybook/blocks": "^7.0.9",
-    "@storybook/react": "^7.0.9",
-    "@storybook/react-webpack5": "^7.0.9",
-    "@storybook/testing-library": "^0.0.14-next.2",
-    "babel-loader": "^8.2.2",
-    "eslint": "^7.30.0",
-    "eslint-plugin-react": "^7.24.0",
-    "eslint-plugin-storybook": "^0.6.12",
-    "prop-types": "^15.8.1",
-    "storybook": "^7.0.9"
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@etchteam/eslint-config": "^1.10.0",
+    "@storybook/addon-essentials": "^8.0.9",
+    "@storybook/addon-webpack5-compiler-swc": "^1.0.2",
+    "@storybook/blocks": "^8.0.9",
+    "@storybook/client-logger": "^8.0.9",
+    "@storybook/components": "^8.0.9",
+    "@storybook/core-events": "^8.0.9",
+    "@storybook/icons": "^1.2.9",
+    "@storybook/manager-api": "^8.0.9",
+    "@storybook/preview-api": "^8.0.9",
+    "@storybook/react-webpack5": "^8.0.9",
+    "@storybook/theming": "^8.0.9",
+    "@swc/core": "^1.4.17",
+    "eslint": "^8.0.0",
+    "eslint-plugin-storybook": "^0.8.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "^8.0.9",
+    "swc-loader": "^0.2.6",
+    "tsup": "^8.0.2"
   },
   "publishConfig": {
     "access": "public"
@@ -68,5 +71,8 @@
   "storybook": {
     "icon": "https://pbs.twimg.com/profile_images/998947662287130625/7Ff1hOdQ_400x400.jpg",
     "displayName": "Status"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
   }
 }

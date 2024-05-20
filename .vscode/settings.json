@@ -1,3 +1,8 @@
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.format.enable": true,
+  "js/ts.implicitProjectConfig.checkJs": true
 }

@@ -1,0 +1,28 @@
+---
+  name: 🚀 Release
+  on:
+    push:
+      branches:
+      - main
+  env:
+    HUSKY: 0
+  jobs:
+    publish:
+      name: Publish
+      runs-on: ubuntu-latest
+      if: "! contains(toJSON(github.event.commits.*.message), '[skip ci]')"
+      steps:
+        - uses: actions/checkout@v4
+          with:
+            fetch-depth: 0
+            persist-credentials: false
+        - uses: actions/setup-node@v4
+          with:
+            node-version-file: .nvmrc
+            cache: npm
+        - run: npm ci
+        - name: Publish
+          env:
+            GH_TOKEN: ${{ secrets.GH_TOKEN }}
+            NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          run: npm run release

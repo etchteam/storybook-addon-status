@@ -1,6 +1,9 @@
-import React from 'react';
+import { useParameter } from '@storybook/manager-api';
 import { styled, css } from '@storybook/theming';
-import { startCase } from 'lodash';
+import startCase from 'lodash/startCase';
+import React from 'react';
+
+import { ADDON_ID } from '../constants';
 import { defaultStatuses, defaultBackground, defaultColor } from '../defaults';
 
 const tagStyles = css`
@@ -24,7 +27,9 @@ const TextTag = styled.span`
   ${tagStyles}
 `;
 
-const StatusTag = ({ parameters }) => {
+const StatusTag = () => {
+  const parameters = useParameter(ADDON_ID, null);
+
   if (parameters === null) {
     return null;
   }
@@ -82,10 +87,16 @@ const StatusTag = ({ parameters }) => {
         const label = startCase(statusConfig.label);
 
         const style = {
-          color: color
-           ?? (defaultStatuses[label] ? defaultStatuses[label].color : defaultColor),
-          backgroundColor: background
-           ?? (defaultStatuses[label] ? defaultStatuses[label].background : defaultBackground),
+          color:
+            color ??
+            (defaultStatuses[label]
+              ? defaultStatuses[label].color
+              : defaultColor),
+          backgroundColor:
+            background ??
+            (defaultStatuses[label]
+              ? defaultStatuses[label].background
+              : defaultBackground),
         };
 
         return statusUrl ? (

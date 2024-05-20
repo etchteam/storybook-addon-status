@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button } from './Button';
+import Button from './Button';
 
 export default {
   title: 'Example/Button',
@@ -12,8 +12,8 @@ export default {
     status: {
       type: 'beta',
       url: 'http://www.url.com/status',
-    }
-  }
+    },
+  },
 };
 
 const Template = (args) => <Button {...args} />;

@@ -17,7 +17,7 @@ Then create a file called `main.js` in your storybook config.
 Add the following content to it:
 
 ```js
-module.exports = {
+export default {
   addons: ['@etchteam/storybook-addon-status'],
 };
 ```
@@ -25,16 +25,18 @@ module.exports = {
 In `preview.js` you can globally configure custom status configurations, or overwrite the built in "beta", "deprecated", "stable" & "releaseCandidate"
 
 ```js
-export const parameters = {
-  status: {
-    statuses: {
-      released: {
-        background: '#0000ff',
-        color: '#ffffff',
-        description: 'This component is stable and released',
+export default {
+  parameters: {
+    status: {
+      statuses: {
+        released: {
+          background: '#0000ff',
+          color: '#ffffff',
+          description: 'This component is stable and released',
+        },
       },
     },
-  },
+  }
 };
 ```
 
@@ -58,17 +60,31 @@ export default {
   },
 };
 
-export const defaultView = () => (
+export const Default = () => (
   <a href="https://makebetter.software">Make Better Software</a>
 );
 ```
 
-For multiple statuses `type` also accepts array values. If not specifically set every status uses `status.url` as the linked Url.
+For multiple statuses `type` also accepts array values.
 
-```jsonc
-status: {
-  type: ['beta', 'released', 'myCustomStatus', { name: 'stable', url: 'http://www.example.com' }],
-  // url, statuses ...
+If not specifically set every status uses `status.url` as the linked Url.
+
+```js
+export default {
+  parameters: {
+    status: {
+      type: [
+        'beta',
+        'released',
+        'myCustomStatus',
+        {
+          name: 'stable',
+          url: 'http://www.example.com'
+        }
+      ],
+      // url, statuses ..
+    },
+  },
 }
 ```
 
@@ -78,16 +94,21 @@ status: {
 
 ```js
 import { Meta } from "@storybook/addon-docs/blocks";
-<Meta title="BetterSoftwareLink" parameters={{ status: { type: 'beta' } }}  /> // 'beta' | 'stable' | 'deprecated' | 'releaseCandidate'
-...
+
+<Meta
+  title="BetterSoftwareLink"
+  parameters={{ status: { type: 'beta' } }}
+/>
 ```
 
-You'll get an awesome label injected in the top toolbar and the sidebar.
+You'll get a label injected in the top toolbar and the sidebar.
 
-**Note** the `type` will be used as label for tag and will convert camelCase to words (release)
-
-Made with ☕ at [Etch](https://etch.co)
+**Note** the `type` will be used as label for tag and will convert camelCase to words
 
 ## Migration guide
 
 Need to [update your major version](Migration.md)?
+
+---
+
+Made with ☕ at [Etch](https://etch.co)
