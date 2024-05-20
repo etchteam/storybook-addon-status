@@ -17,7 +17,11 @@ addons.register(ADDON_ID, (api) => {
   addons.setConfig({
     sidebar: {
       renderLabel: (item) => {
-        const { name, isLeaf } = item;
+        const { name } = item;
+        const isLeaf =
+          item.type === 'root' ||
+          item.type === 'group' ||
+          item.type === 'story';
 
         try {
           const status = api.getParameters(item.id, ADDON_ID);
