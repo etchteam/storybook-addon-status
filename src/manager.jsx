@@ -18,16 +18,13 @@ addons.register(ADDON_ID, (api) => {
     sidebar: {
       renderLabel: (item) => {
         const { name } = item;
-        const isLeaf =
-          item.type === 'root' ||
-          item.type === 'group' ||
-          item.type === 'story';
+        const isLeaf = ['root', 'group', 'story'].includes(item.type);
 
         try {
           const status = api.getParameters(item.id, ADDON_ID);
 
           // item can be a Root | Group | Story
-          if (!isLeaf || !status || !status?.type) {
+          if (!isLeaf || !status?.type) {
             return name;
           }
 
