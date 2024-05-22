@@ -9,14 +9,14 @@
 }
 
 .storybook-button--primary {
-  background-color: #1ea7fd;
-  color: #fff;
+  background-color: var(--button-primary-background);
+  color: var(--button-primary-color);
 }
 
 .storybook-button--secondary {
-  background-color: transparent;
-  box-shadow: rgba(0, 0, 0, 0.15) 0 0 0 1px inset;
-  color: #333;
+  background-color: var(--button-secondary-background);
+  box-shadow: var(--button-secondary-box-shadow);
+  color: var(--button-secondary-color);
 }
 
 .storybook-button--small {

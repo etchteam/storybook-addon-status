@@ -1,23 +1,14 @@
 ---
-name: CI
+name: 👮 CI
 on:
   pull_request:
-    branches: ['main']
+    branches:
+    - main
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version-file: .nvmrc
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run build-storybook
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: github/super-linter/slim@v4
@@ -32,9 +23,20 @@ jobs:
           VALIDATE_JSX: false
           VALIDATE_CSS: false
           VALIDATE_HTML: false
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
-          cache: 'npm'
+          cache: npm
       - run: npm ci
-      - run: npm run lint
+      - name: Lint JS
+        run: npx --no -- eslint src
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build-storybook

@@ -1,7 +1,10 @@
-import { css, styled } from '@storybook/theming';
+import { useParameter } from '@storybook/manager-api';
+import { styled, css } from '@storybook/theming';
 import startCase from 'lodash/startCase';
+import React from 'react';
 
-import { defaultBackground, defaultColor, defaultStatuses } from '../defaults';
+import { ADDON_ID } from '../constants';
+import { defaultStatuses, defaultBackground, defaultColor } from '../defaults';
 
 const tagStyles = css`
   align-self: center;
@@ -24,7 +27,9 @@ const TextTag = styled.span`
   ${tagStyles}
 `;
 
-const StatusTag = ({ parameters }) => {
+const StatusTag = () => {
+  const parameters = useParameter(ADDON_ID, null);
+
   if (parameters === null) {
     return null;
   }

@@ -1,9 +1,9 @@
-import { func, shape } from 'prop-types';
+import React from 'react';
 
-import { Button } from './Button';
+import Button from './Button';
 import './header.css';
 
-export const Header = ({ user, onLogin, onLogout, onCreateAccount }) => (
+const Header = ({ user, onLogin, onLogout, onCreateAccount, children }) => (
   <header>
     <div className="wrapper">
       <div>
@@ -29,6 +29,7 @@ export const Header = ({ user, onLogin, onLogout, onCreateAccount }) => (
           </g>
         </svg>
         <h1>Acme</h1>
+        <p>{children}</p>
       </div>
       <div>
         {user ? (
@@ -49,13 +50,4 @@ export const Header = ({ user, onLogin, onLogout, onCreateAccount }) => (
   </header>
 );
 
-Header.propTypes = {
-  user: shape({}),
-  onLogin: func.isRequired,
-  onLogout: func.isRequired,
-  onCreateAccount: func.isRequired,
-};
-
-Header.defaultProps = {
-  user: null,
-};
+export default Header;

@@ -1,33 +1,30 @@
-import { addons, types, useParameter } from '@storybook/manager-api';
+import { addons, types } from '@storybook/manager-api';
 import startCase from 'lodash/startCase';
+import React from 'react';
 
 import StatusDot from './components/StatusDot';
-import Status from './components/StatusTag';
-import { ADDON_ID, ADDON_PARAM_KEY } from './constants';
+import StatusTag from './components/StatusTag';
+import { ADDON_ID } from './constants';
 import { defaultStatuses } from './defaults';
 
 addons.register(ADDON_ID, (api) => {
   addons.add(ADDON_ID, {
     title: 'Status',
     type: types.TOOL,
-    render: () => {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      const parameters = useParameter(ADDON_PARAM_KEY, null);
-
-      return <Status parameters={parameters} />;
-    },
+    render: () => <StatusTag />,
   });
 
   addons.setConfig({
     sidebar: {
       renderLabel: (item) => {
-        const { name, isLeaf } = item;
+        const { name } = item;
+        const isLeaf = ['root', 'group', 'story'].includes(item.type);
 
         try {
-          const status = api.getParameters(item.id, ADDON_PARAM_KEY);
+          const status = api.getParameters(item.id, ADDON_ID);
 
           // item can be a Root | Group | Story
-          if (!isLeaf || !status || !status?.type) {
+          if (!isLeaf || !status?.type) {
             return name;
           }
 

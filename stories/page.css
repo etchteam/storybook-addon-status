@@ -1,5 +1,5 @@
 section {
-  color: #333;
+  color: var(--body-color);
   font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 24px;
@@ -8,7 +8,7 @@ section {
   padding: 48px 20px;
 }
 
-h2 {
+section h2 {
   display: inline-block;
   font-size: 32px;
   font-weight: 900;
@@ -17,25 +17,25 @@ h2 {
   vertical-align: top;
 }
 
-p {
+section p {
   margin: 1em 0;
 }
 
-a {
+section a {
   color: #1ea7fd;
   text-decoration: none;
 }
 
-ul {
+section ul {
   margin: 1em 0;
   padding-left: 30px;
 }
 
-li {
+section li {
   margin-bottom: 8px;
 }
 
-.tip {
+section .tip {
   background: #e7fdd8;
   border-radius: 1em;
   color: #66bf3c;
@@ -48,14 +48,14 @@ li {
   vertical-align: top;
 }
 
-.tip-wrapper {
+section .tip-wrapper {
   font-size: 13px;
   line-height: 20px;
   margin-bottom: 40px;
   margin-top: 40px;
 }
 
-.tip-wrapper svg {
+section .tip-wrapper svg {
   display: inline-block;
   height: 12px;
   margin-right: 4px;
@@ -64,6 +64,7 @@ li {
   width: 12px;
 }
 
-.tip-wrapper svg path {
+/* stylelint-disable-next-line selector-max-compound-selectors */
+section .tip-wrapper svg path {
   fill: #1ea7fd;
 }

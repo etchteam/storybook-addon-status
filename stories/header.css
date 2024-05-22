@@ -1,6 +1,6 @@
 .wrapper {
   align-items: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--header-border-color);
   display: flex;
   font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   justify-content: space-between;
