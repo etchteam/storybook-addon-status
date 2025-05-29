@@ -1,6 +1,6 @@
-import { addons, types } from '@storybook/manager-api';
 import startCase from 'lodash/startCase';
 import React from 'react';
+import { addons, types } from 'storybook/manager-api';
 
 import StatusDot from './components/StatusDot';
 import StatusTag from './components/StatusTag';

@@ -1,4 +1,4 @@
-import { globalPackages as globalManagerPackages } from '@storybook/manager/globals';
+import { globalPackages as globalManagerPackages } from 'storybook/internal/manager/globals';
 import { defineConfig } from 'tsup';
 
 // The current browsers supported by Storybook v7
