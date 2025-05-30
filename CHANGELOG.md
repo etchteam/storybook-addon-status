@@ -1,3 +1,15 @@
+## [6.0.0](https://github.com/etchteam/storybook-addon-status/compare/v5.0.0...v6.0.0) (2025-05-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* Storybook packages have been consolidated/moved/deleted
+
+### Features
+
+* update browser target list ([3b1413c](https://github.com/etchteam/storybook-addon-status/commit/3b1413c6546e4a15ad6d68eccb4231ce0a2baadd))
+* update dependencies for storybook v9 ([27cbf9e](https://github.com/etchteam/storybook-addon-status/commit/27cbf9ee599949c2a2cac53e7b4a71a63887aed4))
+
 ## [5.0.0](https://github.com/etchteam/storybook-addon-status/compare/v4.2.2...v5.0.0) (2024-05-28)
 
 
