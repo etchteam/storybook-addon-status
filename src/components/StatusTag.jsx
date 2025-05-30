@@ -1,7 +1,7 @@
-import { useParameter } from '@storybook/manager-api';
-import { styled, css } from '@storybook/theming';
 import startCase from 'lodash/startCase';
 import React from 'react';
+import { useParameter } from 'storybook/manager-api';
+import { styled, css } from 'storybook/theming';
 
 import { ADDON_ID } from '../constants';
 import { defaultStatuses, defaultBackground, defaultColor } from '../defaults';
