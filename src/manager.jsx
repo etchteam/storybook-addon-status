@@ -42,25 +42,28 @@ addons.register(ADDON_ID, (api) => {
             customConfigs,
           });
 
-          const statusConfig = statusConfigs?.[0];
-
-          if (!statusConfig) {
+          if (statusConfigs.length === 0) {
             return name;
           }
-
-          const {
-            label: statusName,
-            status: { background, description },
-          } = statusConfig;
 
           return (
             <>
               {name}
-              <StatusDot
-                type={statusName}
-                background={background}
-                title={`${startCase(statusName)}: ${description}`}
-              />
+              {statusConfigs.map((statusConfig) => {
+                const {
+                  label: statusName,
+                  status: { background, description },
+                } = statusConfig;
+
+                return (
+                  <StatusDot
+                    key={statusName}
+                    type={statusName}
+                    background={background}
+                    title={`${startCase(statusName)}: ${description}`}
+                  />
+                );
+              })}
             </>
           );
         } catch (error) {
