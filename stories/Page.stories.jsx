@@ -6,11 +6,7 @@ import Page from './Page';
 export default {
   title: 'Example/Page',
   component: Page,
-  parameters: {
-    status: {
-      type: 'customStatus',
-    },
-  },
+  tags: ['customStatus'],
 };
 
 const Template = (args) => <Page {...args} />;
