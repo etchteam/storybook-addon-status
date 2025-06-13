@@ -10,10 +10,17 @@ export default {
   },
   parameters: {
     status: {
-      type: 'beta',
-      url: 'http://www.url.com/status',
+      type: [
+        'beta',
+        {
+          name: 'customStatus',
+          url: 'http://www.url.com/custom',
+        },
+      ],
+      url: 'http://www.url.com/beta',
     },
   },
+  tags: ['beta', 'customStatus'],
 };
 
 const Template = (args) => <Button {...args} />;
