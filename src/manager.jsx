@@ -5,7 +5,7 @@ import { addons, types } from 'storybook/manager-api';
 import StatusDot from './components/StatusDot';
 import StatusTag from './components/StatusTag';
 import { ADDON_ID } from './constants';
-import { defaultStatuses } from './defaults';
+import { getStatusConfigs } from './getStatusConfigs';
 
 addons.register(ADDON_ID, (api) => {
   addons.add(ADDON_ID, {
@@ -17,39 +17,41 @@ addons.register(ADDON_ID, (api) => {
   addons.setConfig({
     sidebar: {
       renderLabel: (item) => {
-        const { name } = item;
+        const { name, tags } = item;
         const isLeaf = ['root', 'group', 'story'].includes(item.type);
 
         try {
-          const status = api.getParameters(item.id, ADDON_ID);
+          const parameters = api.getParameters(item.id, ADDON_ID);
 
           // item can be a Root | Group | Story
-          if (!isLeaf || !status?.type) {
+          if (!isLeaf || (tags.length === 0 && !parameters?.type)) {
             return name;
           }
 
-          const statusConfigMap = {
-            ...defaultStatuses,
-            ...(status.statuses || {}),
-          };
+          // Get custom status configurations from the current story's parameters.
+          // This will include any custom statuses defined in preview.js or story parameters.
+          // However custom statuses from story parameters will only be available in the sidebar
+          // when viewing that story. This is a storybook limitation:
+          // https://github.com/storybookjs/storybook/discussions/24022
+          const customConfigs =
+            api.getCurrentStoryData().parameters?.status?.statuses;
 
-          let statusName = '';
+          const statusConfigs = getStatusConfigs({
+            tags,
+            parameters,
+            customConfigs,
+          });
 
-          if (Array.isArray(status.type)) {
-            const firstStatus = status.type?.[0];
-            statusName =
-              typeof firstStatus === 'string' ? firstStatus : firstStatus.name;
-          } else {
-            statusName = status.type;
-          }
-
-          const statusConfig = statusConfigMap[statusName];
+          const statusConfig = statusConfigs?.[0];
 
           if (!statusConfig) {
             return name;
           }
 
-          const { background, description } = statusConfig;
+          const {
+            label: statusName,
+            status: { background, description },
+          } = statusConfig;
 
           return (
             <>
