@@ -1,6 +1,6 @@
 import startCase from 'lodash/startCase';
 import React from 'react';
-import { useParameter, useStorybookApi } from 'storybook/manager-api';
+import { useParameter, useStorybookApi, addons } from 'storybook/manager-api';
 import { styled, css } from 'storybook/theming';
 
 import { ADDON_ID } from '../constants';
@@ -33,12 +33,12 @@ const StatusTag = () => {
   const tags = api.getCurrentStoryData()?.tags ?? [];
 
   const parameters = useParameter(ADDON_ID, null);
+  const customConfigs = addons.getConfig()?.[ADDON_ID]?.statuses;
 
   const statusConfigs = getStatusConfigs({
     tags,
     parameters,
-    // No need to pass customConfigs here as within a story, parameters.statuses
-    // already includes the custom statuses defined in preview.js.
+    customConfigs,
   });
 
   if (!statusConfigs?.length) {
