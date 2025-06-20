@@ -14,6 +14,8 @@ addons.register(ADDON_ID, (api) => {
     render: () => <StatusTag />,
   });
 
+  const statusAddonConfig = addons.getConfig()?.[ADDON_ID] || {};
+
   addons.setConfig({
     sidebar: {
       renderLabel: (item) => {
@@ -34,6 +36,7 @@ addons.register(ADDON_ID, (api) => {
           // when viewing that story. This is a storybook limitation:
           // https://github.com/storybookjs/storybook/discussions/24022
           const customConfigs =
+            statusAddonConfig?.statuses ||
             api.getCurrentStoryData().parameters?.status?.statuses;
 
           const statusConfigs = getStatusConfigs({
