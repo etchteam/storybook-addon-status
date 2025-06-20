@@ -23,6 +23,11 @@ addons.register(ADDON_ID, (api) => {
         const isLeaf = ['root', 'group', 'story'].includes(item.type);
 
         try {
+          const sidebarDotsConfig = statusAddonConfig?.sidebarDots;
+          if (sidebarDotsConfig === 'none') {
+            return name;
+          }
+
           const parameters = api.getParameters(item.id, ADDON_ID);
 
           // item can be a Root | Group | Story
@@ -39,7 +44,7 @@ addons.register(ADDON_ID, (api) => {
             statusAddonConfig?.statuses ||
             api.getCurrentStoryData().parameters?.status?.statuses;
 
-          const statusConfigs = getStatusConfigs({
+          let statusConfigs = getStatusConfigs({
             tags,
             parameters,
             customConfigs,
@@ -47,6 +52,10 @@ addons.register(ADDON_ID, (api) => {
 
           if (statusConfigs.length === 0) {
             return name;
+          }
+
+          if (sidebarDotsConfig !== 'multiple') {
+            statusConfigs = [statusConfigs[0]];
           }
 
           return (
