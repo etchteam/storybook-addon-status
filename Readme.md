@@ -22,25 +22,26 @@ export default {
 };
 ```
 
-In `preview.js` you can globally configure custom status configurations, or overwrite the built in "beta", "deprecated", "stable" & "releaseCandidate".
+In `manager.js` you can globally configure custom status configurations, or overwrite the built in "beta", "deprecated", "stable" & "releaseCandidate". You can also change how status dots will appear in the sidebar with the `sidebarDots` prop.
 
 ```js
-export default {
-  parameters: {
-    status: {
-      statuses: {
-        released: {
-          background: '#0000ff',
-          color: '#ffffff',
-          description: 'This component is stable and released',
-        },
+import { addons } from "storybook/manager-api";
+
+addons.setConfig({
+  status: {
+    statuses: {
+      released: {
+        background: '#0000ff',
+        color: '#ffffff',
+        description: 'This component is stable and released',
       },
     },
-  }
-};
+    sidebarDots: 'single', // 'single' | 'multiple' | 'none'. 'single' is the default
+  },
+});
 ```
 
-**NOTE:** Each key will be used as the label for the tag and will convert camelCase to words
+**NOTE:** Each key will be used as the label for the status and will convert camelCase to words
 
 ## Story Usage
 
@@ -65,7 +66,7 @@ export default {
 };
 ```
 
-This can be used for the built-in statuses, as well as any custom statuses defined in `preview.js`
+This can be used for the built-in statuses, as well as any custom statuses defined in `manager.js`. Only these tags will appear as statuses - if they are not built-in or have a definition in `manager.js`, they will be ignored by the addon. This means that status tags can be used alongside tags for other purposes.
 
 Using tags to define statuses means that stories can also be [filtered](https://storybook.js.org/docs/writing-stories/tags#filtering-by-custom-tags) by status.
 
@@ -87,7 +88,7 @@ export default {
 };
 ```
 
-`type` also accepts an object with `name` and `url` keys, or an array or strings and/or objects for multiple statuses.
+`type` also accepts an object with `name` and `url` keys, or an array of strings and/or objects for multiple statuses.
 
 If not specifically set, every status uses `status.url` as the linked Url.
 
@@ -110,7 +111,7 @@ export default {
 }
 ```
 
-Setting statuses via the story parameters allows more customisation on a story-by-story basis, but at the expense of sidebar filtering. Additionally, using this method means that the status dot in the sidebar only shows the color of the first status, and only for the story that is currently being viewed.
+Setting statuses via the story parameters allows more customisation on a story-by-story basis, but at the expense of sidebar filtering. Additionally, using this method means that the status dot(s) in the sidebar only shows for the story that is currently being viewed - this is a [known limitation](https://github.com/storybookjs/storybook/discussions/24022#discussioncomment-12737532) of the way Storybook works.
 
 ### Combined method
 
@@ -144,7 +145,7 @@ export default {
 };
 ```
 
-**NOTE:** The dot in the sidebar for a status with custom styles added in a particular story will only work while you are viewing that story. This is [known limitation](https://github.com/storybookjs/storybook/discussions/24022#discussioncomment-12737532) of the way Storybook works. We recommend [defining custom status styles globally](#configuration) in `preview.js` wherever possible instead.
+**NOTE:** The sidebar dot(s) for a status with custom styles added in a particular story will only work while you are viewing that story. This is a [known limitation](https://github.com/storybookjs/storybook/discussions/24022#discussioncomment-12737532) of the way Storybook works. We recommend [defining custom status styles globally](#configuration) in `preview.js` wherever possible instead.
 
 ## Migration guide
 
