@@ -1,4 +1,3 @@
-import { background } from "storybook/internal/theming";
 import { addons } from "storybook/manager-api";
 
 addons.setConfig({
