@@ -36,7 +36,7 @@ addons.register(ADDON_ID, (api) => {
           }
 
           // Get custom status configurations from the current story's parameters.
-          // This will include any custom statuses defined in preview.js or story parameters.
+          // This will include any custom statuses defined in manager.js, preview.js or story parameters.
           // However custom statuses from story parameters will only be available in the sidebar
           // when viewing that story. This is a storybook limitation:
           // https://github.com/storybookjs/storybook/discussions/24022

@@ -41,7 +41,9 @@ addons.setConfig({
 });
 ```
 
-**NOTE:** Each key will be used as the label for the status and will convert camelCase to words
+**IMPORTANT:** The addon was previously configured using parameters in `preview.js`. This will still work as before, however newer features such as sidebar dot customisation are not available.
+
+**NOTE:** Each key will be used as the label for the status and will convert camelCase to words.
 
 ## Story Usage
 
