@@ -8,9 +8,13 @@ export default {
   argTypes: {
     backgroundColor: { control: 'color' },
   },
+  tags: ['beta', 'customStatus'],
   parameters: {
     status: {
-      type: 'beta',
+      type: {
+        name: 'customStatus',
+        url: 'http://www.url.com/custom',
+      },
       url: 'http://www.url.com/status',
     },
   },
