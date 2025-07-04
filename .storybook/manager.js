@@ -1,3 +1,4 @@
+import { background } from "storybook/internal/theming";
 import { addons } from "storybook/manager-api";
 
 addons.setConfig({
@@ -9,5 +10,6 @@ addons.setConfig({
         description: 'This component is stable and released',
       },
     },
+    sidebarDots: 'multiple', // 'single' | 'multiple' | 'none'. 'single' is the default
   },
 });
