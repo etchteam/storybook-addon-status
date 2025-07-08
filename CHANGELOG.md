@@ -1,3 +1,19 @@
+## [7.0.0](https://github.com/etchteam/storybook-addon-status/compare/v6.0.0...v7.0.0) (2025-07-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* new way to set story statuses
+* Storybook packages have been consolidated/moved/deleted
+
+### Features
+
+* show all statuses in sidebar ([9a2153c](https://github.com/etchteam/storybook-addon-status/commit/9a2153c0d5d3a55b81f099d5d8071c059f78cadb))
+* sidebar dots config and show single dot by default ([add0276](https://github.com/etchteam/storybook-addon-status/commit/add0276203336d0d36730c6c60b21ad9939e7eeb))
+* update browser target list ([3ec6a3d](https://github.com/etchteam/storybook-addon-status/commit/3ec6a3d12de2ffaf13c68a3bad31a2a46ff90675))
+* update dependencies for storybook v9 ([2f731c6](https://github.com/etchteam/storybook-addon-status/commit/2f731c6885a221121305b55cdedd82f24981291d))
+* use storybook tags to set statuses ([2bf03f8](https://github.com/etchteam/storybook-addon-status/commit/2bf03f8d441bcb3534bed60d1eb864f13e3aa7a5))
+
 ## [6.0.0](https://github.com/etchteam/storybook-addon-status/compare/v5.0.0...v6.0.0) (2025-05-30)
 
 
