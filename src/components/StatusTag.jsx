@@ -1,10 +1,11 @@
 import startCase from 'lodash/startCase';
 import React from 'react';
-import { useParameter } from 'storybook/manager-api';
+import { useParameter, useStorybookApi, addons } from 'storybook/manager-api';
 import { styled, css } from 'storybook/theming';
 
 import { ADDON_ID } from '../constants';
 import { defaultStatuses, defaultBackground, defaultColor } from '../defaults';
+import { getStatusConfigs } from '../getStatusConfigs';
 
 const tagStyles = css`
   align-self: center;
@@ -28,52 +29,17 @@ const TextTag = styled.span`
 `;
 
 const StatusTag = () => {
+  const api = useStorybookApi();
+  const tags = api.getCurrentStoryData()?.tags ?? [];
+
   const parameters = useParameter(ADDON_ID, null);
+  const customConfigs = addons.getConfig()?.[ADDON_ID]?.statuses;
 
-  if (parameters === null) {
-    return null;
-  }
-
-  const { type, url, statuses } = parameters;
-
-  if (!type) {
-    return null;
-  }
-
-  const statusConfigMap = {
-    ...defaultStatuses,
-    ...(statuses || {}),
-  };
-
-  let statusConfigs;
-
-  if (Array.isArray(type)) {
-    statusConfigs = type.map((t) => {
-      if (typeof t === 'string') {
-        return {
-          label: t,
-          status: statusConfigMap[t],
-          url,
-        };
-      }
-
-      return {
-        label: t.name,
-        status: statusConfigMap[t.name],
-        url: t.url,
-      };
-    });
-  } else {
-    statusConfigs = [
-      {
-        label: type,
-        status: statusConfigMap[type],
-        url,
-      },
-    ];
-  }
-
-  statusConfigs = statusConfigs.filter((x) => x.status != null);
+  const statusConfigs = getStatusConfigs({
+    tags,
+    parameters,
+    customConfigs,
+  });
 
   if (!statusConfigs?.length) {
     return null;
