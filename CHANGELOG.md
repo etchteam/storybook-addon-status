@@ -1,3 +1,10 @@
+## [7.0.1](https://github.com/etchteam/storybook-addon-status/compare/v7.0.0...v7.0.1) (2025-07-09)
+
+
+### Bug Fixes
+
+* merge existing sidebar config with addon config ([d34c1e5](https://github.com/etchteam/storybook-addon-status/commit/d34c1e5c1ac679e613a69dca5690ce23c07d3bb0))
+
 ## [7.0.0](https://github.com/etchteam/storybook-addon-status/compare/v6.0.0...v7.0.0) (2025-07-08)
 
 
