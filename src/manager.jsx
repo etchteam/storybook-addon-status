@@ -8,31 +8,40 @@ import { ADDON_ID } from './constants';
 import { getStatusConfigs } from './getStatusConfigs';
 
 addons.register(ADDON_ID, (api) => {
+  const addonsConfig = addons.getConfig();
+  const existingSidebarConfig = addonsConfig?.sidebar ?? {};
+
   addons.add(ADDON_ID, {
     title: 'Status',
     type: types.TOOL,
     render: () => <StatusTag />,
   });
 
-  const statusAddonConfig = addons.getConfig()?.[ADDON_ID] || {};
+  const statusAddonConfig = addonsConfig?.[ADDON_ID] ?? {};
 
   addons.setConfig({
     sidebar: {
+      ...existingSidebarConfig,
       renderLabel: (item) => {
         const { name, tags } = item;
         const isLeaf = ['root', 'group', 'story'].includes(item.type);
 
         try {
+          const fallbackLabel = existingSidebarConfig?.renderLabel
+            ? existingSidebarConfig.renderLabel(item)
+            : name;
+
           const sidebarDotsConfig = statusAddonConfig?.sidebarDots;
+
           if (sidebarDotsConfig === 'none') {
-            return name;
+            return fallbackLabel;
           }
 
           const parameters = api.getParameters(item.id, ADDON_ID);
 
           // item can be a Root | Group | Story
           if (!isLeaf || (tags.length === 0 && !parameters?.type)) {
-            return name;
+            return fallbackLabel;
           }
 
           // Get custom status configurations from the current story's parameters.
@@ -51,7 +60,7 @@ addons.register(ADDON_ID, (api) => {
           });
 
           if (statusConfigs.length === 0) {
-            return name;
+            return fallbackLabel;
           }
 
           if (sidebarDotsConfig !== 'multiple') {
@@ -60,7 +69,7 @@ addons.register(ADDON_ID, (api) => {
 
           return (
             <>
-              {name}
+              {fallbackLabel}
               {statusConfigs.map((statusConfig) => {
                 const {
                   label: statusName,
