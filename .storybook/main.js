@@ -2,7 +2,7 @@ const config = {
   stories: ['../stories/**/*.mdx', '../stories/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-webpack5-compiler-swc',
-    './local-preset.js',
+    import.meta.resolve('./local-preset.js'),
     '@storybook/addon-docs'
   ],
   framework: {
