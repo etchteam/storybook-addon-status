@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-`@etchteam/storybook-addon-status` is a Storybook 10 addon that surfaces a per-story status (beta / deprecated / stable / releaseCandidate / custom) in the toolbar and sidebar. Distributed as ESM. The repo is also a self-hosted Storybook used to dogfood the addon.
+`@etchteam/storybook-addon-status` is a Storybook addon that surfaces a per-story status (beta / deprecated / stable / releaseCandidate / custom) in the toolbar and sidebar. Distributed as ESM. The repo is also a self-hosted Storybook used to dogfood the addon.
 
-Node version is pinned in `.nvmrc` (22.14.0).
+Node version is pinned in `.nvmrc`.
 
 ## Commands
 
