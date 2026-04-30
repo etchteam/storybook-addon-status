@@ -72,6 +72,35 @@ This can be used for the built-in statuses, as well as any custom statuses defin
 
 Using tags to define statuses means that stories can also be [filtered](https://storybook.js.org/docs/writing-stories/tags#filtering-by-custom-tags) by status.
 
+#### Component vs story level tags
+
+Tags can be set at two levels in a CSF file, and the addon renders a status dot at both the component node and the individual story nodes in the sidebar:
+
+- **Meta level** (`export default { tags: [...] }`) — applies to the component as a whole and is inherited by every story underneath it.
+- **Story level** (`Story.tags = [...]` or `tags` on the story object) — applies to that one story, *merged with* the meta tags. A story can negate an inherited meta tag by prefixing it with `!`.
+
+```js
+export default {
+  title: 'Example/Button',
+  tags: ['beta'],
+};
+
+// Resolved tags: ['beta'] — inherits from the meta.
+export const Default = Template.bind({});
+
+// Resolved tags: ['stable'] — negates 'beta' and adds 'stable'.
+export const Stable = Template.bind({});
+Stable.tags = ['!beta', 'stable'];
+
+// Resolved tags: ['beta', 'deprecated'] — adds on top of the meta.
+export const SoonGone = Template.bind({});
+SoonGone.tags = ['deprecated'];
+```
+
+In the sidebar, the dot next to the **component** (the CSF file's name) reflects the meta-level tags only. The dot next to each **story** reflects the merged tag set, so a story can show a different status to its parent component.
+
+> Tags on intermediate folder segments — the parts of `title: 'A/B/C'` between slashes — aren't surfaced by Storybook and so don't render dots either.
+
 ### Story parameters
 
 The alternative (legacy) way to add statuses to stories is to add them to the `status` property of the story parameters:
