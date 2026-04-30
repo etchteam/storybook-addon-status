@@ -24,11 +24,7 @@ addons.register(ADDON_ID, (api) => {
       ...existingSidebarConfig,
       renderLabel: (item) => {
         const { name, tags } = item;
-        // Sidebar tree entries that can carry status-relevant tags.
-        // 'story' / 'docs' nodes carry their own merged project + meta + story
-        // tags. 'component', 'group' and 'root' nodes carry the intersection
-        // of their descendants' tags, so a non-leaf node only renders a dot
-        // for statuses every story underneath it shares.
+        // Anything not in this list (e.g. future entry types) falls back to the plain label.
         const canHaveStatus = [
           'root',
           'group',

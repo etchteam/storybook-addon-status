@@ -76,8 +76,8 @@ Using tags to define statuses means that stories can also be [filtered](https://
 
 Tags can be set at two levels in a CSF file:
 
-- **Meta level** (`export default { tags: [...] }`) — applies to the component as a whole and is inherited by every story underneath it.
-- **Story level** (`Story.tags = [...]` or `tags` on the story object) — applies to that one story, *merged with* the meta tags. A story can negate an inherited meta tag by prefixing it with `!`.
+- **Component level** (`export default { tags: [...] }`) — applies to the component as a whole and is inherited by every story underneath it.
+- **Story level** (`Story.tags = [...]` or `tags` on the story object) — applies to that one story, *merged with* the component-level tags. A story can negate an inherited tag by prefixing it with `!`.
 
 ```js
 export default {
@@ -85,23 +85,21 @@ export default {
   tags: ['beta'],
 };
 
-// Resolved tags: ['beta'] — inherits from the meta.
+// Resolved tags: ['beta'] — inherited from the component.
 export const Default = Template.bind({});
 
 // Resolved tags: ['stable'] — negates 'beta' and adds 'stable'.
 export const Stable = Template.bind({});
 Stable.tags = ['!beta', 'stable'];
 
-// Resolved tags: ['beta', 'deprecated'] — adds on top of the meta.
+// Resolved tags: ['beta', 'deprecated'] — adds on top of the component.
 export const SoonGone = Template.bind({});
 SoonGone.tags = ['deprecated'];
 ```
 
 The sidebar dot next to a **story** reflects that story's resolved tag set.
 
-The sidebar dot next to a **component** (or any parent folder) reflects the **intersection** of every descendant story's resolved tags — i.e. only statuses that *every* story underneath shares. In the example above, the `Stable` story drops `'beta'`, so even though the other two stories still carry it the component-level intersection is empty and no dot is shown at the component. To get a component-level dot, every story underneath needs to share the status (either inherited from the meta with no negation, or set explicitly on each story).
-
-This intersection rule is what Storybook itself uses to compute non-leaf entry tags, so the same logic applies to title-segment folders: a `'A/B/Button'` folder will only display a status dot when every story nested under it shares one — usually rare in practice.
+The sidebar dot next to a **component** (or any parent folder) only appears for statuses that *every* story underneath shares. In the example above, `Stable` drops `'beta'`, so the component shows no dot.
 
 ### Story parameters
 
