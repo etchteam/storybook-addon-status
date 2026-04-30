@@ -22,7 +22,6 @@ const toolbarStyles = css`
 const sidebarStyles = css`
   font-size: 10px;
   line-height: 16px;
-  margin-left: 0.5em;
   padding: 0 0.4em;
 `;
 

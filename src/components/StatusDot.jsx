@@ -11,7 +11,6 @@ const StatusDot = styled.span`
       : defaultBackground)};
   border-radius: 100%;
   height: 6px;
-  margin-left: 0.5em;
   user-select: none;
   width: 6px;
 `;
