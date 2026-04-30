@@ -2,6 +2,7 @@ import startCase from 'lodash/startCase';
 import React from 'react';
 import { addons, types } from 'storybook/manager-api';
 
+import SidebarStatusTag from './components/SidebarStatusTag';
 import StatusDot from './components/StatusDot';
 import StatusTag from './components/StatusTag';
 import { ADDON_ID } from './constants';
@@ -31,9 +32,18 @@ addons.register(ADDON_ID, (api) => {
             ? existingSidebarConfig.renderLabel(item)
             : name;
 
+          const sidebarTagsConfig = statusAddonConfig?.sidebarTags;
           const sidebarDotsConfig = statusAddonConfig?.sidebarDots;
 
-          if (sidebarDotsConfig === 'none') {
+          // sidebarTags, when set, fully overrides sidebarDots.
+          const isTagMode =
+            sidebarTagsConfig === 'single' || sidebarTagsConfig === 'multiple';
+
+          if (sidebarTagsConfig === 'none') {
+            return fallbackLabel;
+          }
+
+          if (sidebarTagsConfig === undefined && sidebarDotsConfig === 'none') {
             return fallbackLabel;
           }
 
@@ -63,7 +73,11 @@ addons.register(ADDON_ID, (api) => {
             return fallbackLabel;
           }
 
-          if (sidebarDotsConfig !== 'multiple') {
+          const showMultiple = isTagMode
+            ? sidebarTagsConfig === 'multiple'
+            : sidebarDotsConfig === 'multiple';
+
+          if (!showMultiple) {
             statusConfigs = [statusConfigs[0]];
           }
 
@@ -71,6 +85,15 @@ addons.register(ADDON_ID, (api) => {
             <>
               {fallbackLabel}
               {statusConfigs.map((statusConfig) => {
+                if (isTagMode) {
+                  return (
+                    <SidebarStatusTag
+                      key={statusConfig.label}
+                      statusConfig={statusConfig}
+                    />
+                  );
+                }
+
                 const {
                   label: statusName,
                   status: { background, description },
