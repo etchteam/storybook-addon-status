@@ -24,7 +24,19 @@ addons.register(ADDON_ID, (api) => {
       ...existingSidebarConfig,
       renderLabel: (item) => {
         const { name, tags } = item;
-        const isLeaf = ['root', 'group', 'story'].includes(item.type);
+        // Storybook tree entries with tags we can resolve a status from.
+        // 'component' carries meta-level tags from the CSF file;
+        // 'docs' carries tags from autodocs / MDX;
+        // 'story' carries the merged project + meta + story tags.
+        // 'root' and 'group' (title-segment folders) have no user-set tags
+        // but are kept here so any future Storybook change is non-breaking.
+        const canHaveStatus = [
+          'root',
+          'group',
+          'component',
+          'docs',
+          'story',
+        ].includes(item.type);
 
         try {
           const fallbackLabel = existingSidebarConfig?.renderLabel
@@ -39,8 +51,7 @@ addons.register(ADDON_ID, (api) => {
 
           const parameters = api.getParameters(item.id, ADDON_ID);
 
-          // item can be a Root | Group | Story
-          if (!isLeaf || (tags.length === 0 && !parameters?.type)) {
+          if (!canHaveStatus || (tags.length === 0 && !parameters?.type)) {
             return fallbackLabel;
           }
 
