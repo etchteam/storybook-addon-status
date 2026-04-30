@@ -27,7 +27,9 @@ This is a **manager-only addon** — it ships no preview-side code. The publishe
 On `addons.register`:
 
 1. Adds a toolbar tool (`type: types.TOOL`) that renders [StatusTag](src/components/StatusTag.jsx) — the pill(s) shown above the canvas for the current story.
-2. Calls `addons.setConfig({ sidebar: { renderLabel } })` to inject [StatusDot](src/components/StatusDot.jsx)s next to story names in the sidebar. It preserves any pre-existing `renderLabel` by chaining to it.
+2. Calls `addons.setConfig({ sidebar: { renderLabel } })` to inject sidebar indicators next to story names — either [StatusDot](src/components/StatusDot.jsx)s or [SidebarStatusTag](src/components/SidebarStatusTag.jsx)s depending on config (see *Sidebar indicator config* below). It preserves any pre-existing `renderLabel` by chaining to it.
+
+[StatusTag](src/components/StatusTag.jsx) (toolbar) and [SidebarStatusTag](src/components/SidebarStatusTag.jsx) (sidebar) are thin wrappers around the shared presentational [StatusTagBase](src/components/StatusTagBase.jsx), which resolves colours and renders either an `<a>` (toolbar tag with a URL) or a `<span>` based on its `variant` prop. Sidebar tags intentionally never render as links — clicking a story row should navigate to the story.
 
 ### Status resolution ([src/getStatusConfigs.js](src/getStatusConfigs.js))
 
@@ -39,13 +41,18 @@ There are three sources of status data, merged in this precedence:
 
 Tag and parameter statuses are concatenated and deduplicated by name; on collision the parameter version wins (it carries the optional `url`). Statuses with no matching definition are filtered out.
 
-### Sidebar dots quirk
+### Sidebar indicator config
 
-`addons.setConfig({ status: { sidebarDots: 'single' | 'multiple' | 'none' } })` controls how many dots render per story. There is a known Storybook limitation (see comment in [src/manager.jsx:50-54](src/manager.jsx#L50-L54)) that custom status definitions declared in `parameters.status.statuses` are only available to the sidebar while that story is the active one — global custom statuses must live in `manager.js`'s `setConfig`.
+Two mutually-exclusive options under `addons.setConfig({ status: { ... } })` control how each story's status appears in the sidebar:
+
+- `sidebarDots: 'single' | 'multiple' | 'none'` — small coloured dot(s). Default is `'single'`.
+- `sidebarTags: 'single' | 'multiple' | 'none'` — full status tag(s) (same colour/label as the toolbar tag, slightly smaller). When set to any value, **fully overrides** `sidebarDots`.
+
+There is a known Storybook limitation (see comment in [src/manager.jsx](src/manager.jsx) around the `getCurrentStoryData` lookup) that custom status definitions declared in `parameters.status.statuses` are only available to the sidebar while that story is the active one — global custom statuses must live in `manager.js`'s `setConfig`.
 
 ### Demo Storybook ([.storybook/](.storybook/))
 
-[main.js](.storybook/main.js) registers [local-preset.js](.storybook/local-preset.js), which loads the **built** `dist/manager.js` via `managerEntries`. This is why source changes require a rebuild before they appear in `npm run storybook`. [manager.js](.storybook/manager.js) configures a sample custom status and `sidebarDots: 'multiple'` to exercise the addon.
+[main.js](.storybook/main.js) registers [local-preset.js](.storybook/local-preset.js), which loads the **built** `dist/manager.js` via `managerEntries`. This is why source changes require a rebuild before they appear in `npm run storybook`. [manager.js](.storybook/manager.js) configures a sample custom status and sets both `sidebarDots: 'multiple'` and `sidebarTags: 'multiple'` to exercise the addon (since `sidebarTags` is set, the sidebar renders tags rather than dots).
 
 ## Conventions
 
