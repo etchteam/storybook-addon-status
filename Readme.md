@@ -22,7 +22,7 @@ export default {
 };
 ```
 
-In `manager.js` you can globally configure custom status configurations, or overwrite the built in "beta", "deprecated", "stable" & "releaseCandidate". You can also change how status dots will appear in the sidebar with the `sidebarDots` prop.
+In `manager.js` you can globally configure custom status configurations, or overwrite the built in "beta", "deprecated", "stable" & "releaseCandidate". You can also change how statuses appear in the sidebar with the `sidebarDots` and `sidebarTags` props.
 
 ```js
 import { addons } from "storybook/manager-api";
@@ -37,9 +37,14 @@ addons.setConfig({
       },
     },
     sidebarDots: 'single', // 'single' | 'multiple' | 'none'. 'single' is the default
+    sidebarTags: 'single', // 'single' | 'multiple' | 'none'. When set, overrides sidebarDots and renders full status tags in the sidebar instead of dots.
   },
 });
 ```
+
+By default the sidebar shows a small coloured dot next to each story. Setting `sidebarTags` to `'single'` or `'multiple'` switches the sidebar to render the full status tag — the same colour and label as the toolbar tag, but slightly smaller. `sidebarTags: 'none'` hides the indicator entirely (and overrides `sidebarDots`). When `sidebarTags` is not set, `sidebarDots` keeps its existing behaviour.
+
+**Note:** Status URLs are intentionally not used by sidebar tags — clicking a story row in the sidebar should always navigate to that story. Use the toolbar tag (which still renders as a link) to follow the URL.
 
 **IMPORTANT:** The addon was previously configured using parameters in `preview.js`. This will still work as before, however newer features such as sidebar dot customisation are not available.
 
