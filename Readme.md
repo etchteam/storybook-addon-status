@@ -74,7 +74,7 @@ Using tags to define statuses means that stories can also be [filtered](https://
 
 #### Component vs story level tags
 
-Tags can be set at two levels in a CSF file, and the addon renders a status dot at both the component node and the individual story nodes in the sidebar:
+Tags can be set at two levels in a CSF file:
 
 - **Meta level** (`export default { tags: [...] }`) — applies to the component as a whole and is inherited by every story underneath it.
 - **Story level** (`Story.tags = [...]` or `tags` on the story object) — applies to that one story, *merged with* the meta tags. A story can negate an inherited meta tag by prefixing it with `!`.
@@ -97,9 +97,11 @@ export const SoonGone = Template.bind({});
 SoonGone.tags = ['deprecated'];
 ```
 
-In the sidebar, the dot next to the **component** (the CSF file's name) reflects the meta-level tags only. The dot next to each **story** reflects the merged tag set, so a story can show a different status to its parent component.
+The sidebar dot next to a **story** reflects that story's resolved tag set.
 
-> Tags on intermediate folder segments — the parts of `title: 'A/B/C'` between slashes — aren't surfaced by Storybook and so don't render dots either.
+The sidebar dot next to a **component** (or any parent folder) reflects the **intersection** of every descendant story's resolved tags — i.e. only statuses that *every* story underneath shares. In the example above, the `Stable` story drops `'beta'`, so even though the other two stories still carry it the component-level intersection is empty and no dot is shown at the component. To get a component-level dot, every story underneath needs to share the status (either inherited from the meta with no negation, or set explicitly on each story).
+
+This intersection rule is what Storybook itself uses to compute non-leaf entry tags, so the same logic applies to title-segment folders: a `'A/B/Button'` folder will only display a status dot when every story nested under it shares one — usually rare in practice.
 
 ### Story parameters
 

@@ -24,12 +24,11 @@ addons.register(ADDON_ID, (api) => {
       ...existingSidebarConfig,
       renderLabel: (item) => {
         const { name, tags } = item;
-        // Storybook tree entries with tags we can resolve a status from.
-        // 'component' carries meta-level tags from the CSF file;
-        // 'docs' carries tags from autodocs / MDX;
-        // 'story' carries the merged project + meta + story tags.
-        // 'root' and 'group' (title-segment folders) have no user-set tags
-        // but are kept here so any future Storybook change is non-breaking.
+        // Sidebar tree entries that can carry status-relevant tags.
+        // 'story' / 'docs' nodes carry their own merged project + meta + story
+        // tags. 'component', 'group' and 'root' nodes carry the intersection
+        // of their descendants' tags, so a non-leaf node only renders a dot
+        // for statuses every story underneath it shares.
         const canHaveStatus = [
           'root',
           'group',
