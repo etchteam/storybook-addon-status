@@ -24,7 +24,14 @@ addons.register(ADDON_ID, (api) => {
       ...existingSidebarConfig,
       renderLabel: (item) => {
         const { name, tags } = item;
-        const isLeaf = ['root', 'group', 'story'].includes(item.type);
+        // Anything not in this list (e.g. future entry types) falls back to the plain label.
+        const canHaveStatus = [
+          'root',
+          'group',
+          'component',
+          'docs',
+          'story',
+        ].includes(item.type);
 
         try {
           const fallbackLabel = existingSidebarConfig?.renderLabel
@@ -39,8 +46,7 @@ addons.register(ADDON_ID, (api) => {
 
           const parameters = api.getParameters(item.id, ADDON_ID);
 
-          // item can be a Root | Group | Story
-          if (!isLeaf || (tags.length === 0 && !parameters?.type)) {
+          if (!canHaveStatus || (tags.length === 0 && !parameters?.type)) {
             return fallbackLabel;
           }
 

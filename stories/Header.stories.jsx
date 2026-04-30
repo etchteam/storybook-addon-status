@@ -17,3 +17,4 @@ LoggedIn.args = {
 
 export const LoggedOut = Template.bind({});
 LoggedOut.args = {};
+LoggedOut.tags = ['!stable', 'beta'];

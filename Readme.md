@@ -72,6 +72,35 @@ This can be used for the built-in statuses, as well as any custom statuses defin
 
 Using tags to define statuses means that stories can also be [filtered](https://storybook.js.org/docs/writing-stories/tags#filtering-by-custom-tags) by status.
 
+#### Component vs story level tags
+
+Tags can be set at two levels in a CSF file:
+
+- **Component level** (`export default { tags: [...] }`) — applies to the component as a whole and is inherited by every story underneath it.
+- **Story level** (`Story.tags = [...]` or `tags` on the story object) — applies to that one story, *merged with* the component-level tags. A story can negate an inherited tag by prefixing it with `!`.
+
+```js
+export default {
+  title: 'Example/Button',
+  tags: ['beta'],
+};
+
+// Resolved tags: ['beta'] — inherited from the component.
+export const Default = Template.bind({});
+
+// Resolved tags: ['stable'] — negates 'beta' and adds 'stable'.
+export const Stable = Template.bind({});
+Stable.tags = ['!beta', 'stable'];
+
+// Resolved tags: ['beta', 'deprecated'] — adds on top of the component.
+export const SoonGone = Template.bind({});
+SoonGone.tags = ['deprecated'];
+```
+
+The sidebar dot next to a **story** reflects that story's resolved tag set.
+
+The sidebar dot next to a **component** (or any parent folder) only appears for statuses that *every* story underneath shares. In the example above, `Stable` drops `'beta'`, so the component shows no dot.
+
 ### Story parameters
 
 The alternative (legacy) way to add statuses to stories is to add them to the `status` property of the story parameters:
