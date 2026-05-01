@@ -1,28 +1,39 @@
 ---
-  name: 🚀 Release
-  on:
-    push:
-      branches:
+name: 🚀 Release
+on:
+  push:
+    branches:
       - main
-  env:
-    HUSKY: 0
-  jobs:
-    publish:
-      name: Publish
-      runs-on: ubuntu-latest
-      if: "! contains(toJSON(github.event.commits.*.message), '[skip ci]')"
-      steps:
-        - uses: actions/checkout@v4
-          with:
-            fetch-depth: 0
-            persist-credentials: false
-        - uses: actions/setup-node@v4
-          with:
-            node-version-file: .nvmrc
-            cache: npm
-        - run: npm ci
-        - name: Publish
-          env:
-            GH_TOKEN: ${{ secrets.GH_TOKEN }}
-            NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          run: npm run release
+env:
+  HUSKY: 0
+permissions:
+  contents: read
+jobs:
+  publish:
+    name: 🚀 Publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version-file: .nvmrc
+          registry-url: https://registry.npmjs.org
+      - uses: cycjimmy/semantic-release-action@b12c8f6015dc215fe37bc154d4ad456dd3833c90
+        with:
+          semantic_version: 25.0.1
+          branch: main
+          extends: |
+            @semantic-release/git@10.0.1
+            @semantic-release/changelog@6.0.3
+            @commitlint/cli@20.3.1
+            @commitlint/config-conventional@20.3.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
